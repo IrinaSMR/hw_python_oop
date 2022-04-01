@@ -28,6 +28,7 @@ class Training:
     """Базовый класс тренировки."""
     M_IN_KM = 1000
     LEN_STEP = 0.65
+    MIN_IN_HOUR = 60
 
     def __init__(self,
                  action: int,
@@ -68,7 +69,6 @@ class Running(Training):
     """Тренировка: бег."""
     С_CAL_1 = 18
     C_CAL_2 = 20
-    MIN_IN_HOUR = 60
 
     def get_spent_calories(self) -> float:
         spent_calories = ((self.С_CAL_1 * self.get_mean_speed()
@@ -81,7 +81,6 @@ class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
     K_1 = 0.035
     K_2 = 0.029
-    MIN_IN_HOUR = 60
 
     def __init__(self, action: int,
                  duration: float,
@@ -132,7 +131,7 @@ def read_package(workout_type: str, data: list) -> Training:
                                                        'WLK': SportsWalking
                                                        }
     if workout_type not in workout_type_classes:
-        raise NotImplementedError('Неожидаемый тип {workout_type}')
+        raise KeyError('Неожидаемый тип {workout_type}')
 
     training_class: Type[Training] = workout_type_classes[workout_type]
     return training_class(*data)
