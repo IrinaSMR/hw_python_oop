@@ -42,4 +42,5 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Автор: IrinaSMR
+### Автор: 
+IrinaSMR
